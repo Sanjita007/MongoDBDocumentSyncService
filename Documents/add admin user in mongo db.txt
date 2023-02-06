@@ -1,0 +1,31 @@
+Steps to add admin user in mongodb server
+1. Open command prompt
+
+2. Type the command 
+	mongo "mongodb://mongodb_server_ip:mongodb_port"
+	Example: mongo "mongodb://localhost:27017"
+	=> mongodb_port: Port in which mongodb is running
+	=> mongodb_server_ip: Mongo db server ip
+
+3. Navigate to admin database with the following command
+	use admin
+
+4. Add user using the following command
+	db.createUser({user : "admin_user_name",pwd : "admin_password",roles : [{role : "userAdminAnyDatabase", db : "admin"}, "readWriteAnyDatabase"],mechanisms:[ "SCRAM-SHA-1"] })
+			
+	=> admin_user_name: name for the admin user
+	=> admin_password: admin user password
+	=> everything else must remain the same or please look into "mechanisms"
+
+5. Check if the newly created credentials are working or not with the following command
+	mongodb://admin_user_name:admin_password@mongodb_server:mongodb_port/?authMechanism=SCRAM-SHA-1
+	Example: mongo mongodb://myUserAdmin:abc123@localhost:27017/?authMechanism=SCRAM-SHA-1
+	=> Please look into the authentication mechanisms in mongo db 
+
+Note: Please look furthur into topic of "preventing connection to mongo db without proper authentication"
+	
+References:
+https://www.mongodb.com/docs/drivers/go/current/fundamentals/auth/
+https://www.mongodb.com/docs/v4.4/tutorial/create-users/
+https://www.guru99.com/mongodb-create-user.html
+https://www.geeksforgeeks.org/create-user-and-add-role-in-mongodb/

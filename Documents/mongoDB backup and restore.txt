@@ -1,0 +1,52 @@
+To get started with mongodb backup and restore..
+1. Install mongodb database tools from https://www.mongodb.com/try/download/database-tools?tck=docs_databasetools
+2. Download msi file for windows platform
+3. Install the package
+4. Add new environment variable with mongodb server path (eg: C:\Program Files\MongoDB\Server\5.0\bin)
+5. Add new environment variable with mongodb tools path (eg: C:\Program Files\MongoDB\Tools\100\bin)
+6. Open command prompt and navigate to the folder in which you want to dump backup files from mongodb
+7. Run the following command
+	mongodump <options> <connection-string>
+
+	mongodump mongodb://mongosever_username:mongodb_userpassword@localhost:27017/?authSource=admin
+	- replace 'mongosever_username' with the mongodb server username 
+	- replace 'mongodb_userpassword' with the mongodb server password
+	- replace 'localhost' with the server IP
+	- replace '27017' with the port in which the mongodb is running, 27017 is the default port for mongodb
+8. When mongodump command is successfully run, it creates a sub-folder named dump in the folder
+9. To restore the dump files into the mongodb server, run the follwing command
+	mongorestore <options> <connection-string> <directory or file to restore>
+
+
+Alternate command for mongodump
+
+mongodump --username="sa_cbs" --password="infodev@123" --db="INFINITY_296_001" --authenticationDatabase="admin" --out=C:/backup/ --host="172.30.1.97"
+=> username: mongodb server username
+=> password: mongodb server password
+=> db: database to backup
+=> authenticationDatabase: by default use 'admin'
+=> out: the folder in which you want to save the back dump file
+=> host: mongodb server address/ IP
+
+
+Steps to restore database from dump
+
+1. Open command prompt and run following command to restore individual collection
+mongorestore --host="192.168.20.56" --port 27017 --username "userAdmin" --password "userAdmin" --authenticationDatabase=admin --db "INFINITY_001_001" 
+--collection "DOC_STORE" "D: \MongoDbBackup\DB Backup 2022-01-17\INFINITY_001_001\DOC_STORE.bson" --drop
+=> username: mongodb server username
+=> password: mongodb server password
+=> db: database to backup
+=> authenticationDatabase: by default use 'admin'
+=> host: mongodb server address/ IP
+=> collection: collection to restore into the database
+=> db and collection are depreciated so use --nsInclude=INFINITY_001_001.DOC_STORE instead
+	
+NOTES:
+Mongo backup and restore tools can be used without installing mongodb server to backup databases in remote server, given that the server access is provided
+Does work in remote servers
+
+References
+https://docs.mongodb.com/
+https://docs.mongodb.com/database-tools/mongorestore/
+https://docs.mongodb.com/database-tools/mongodump/

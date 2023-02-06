@@ -1,0 +1,16 @@
+Steps to disable logging into mongo db without proper authentication
+1. Open file 'mongod.cfg' in 'C:\Program Files\MongoDB\Server\5.0\bin' folder
+
+2. Replace the following line
+	#security:
+	
+	with
+	
+	security:
+		authorization: "enabled"
+		
+3. Restart mongo db server from services
+
+
+References
+https://www.mongodb.com/features/mongodb-authentication

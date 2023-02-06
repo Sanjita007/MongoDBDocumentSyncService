@@ -1,0 +1,3 @@
+If you're using visual studio 2022 for the project, then might be incompatible. So to solve this issue, install the Microsoft Visual Studio Installer Projects 2022 from the following link:
+
+https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2022InstallerProjects 

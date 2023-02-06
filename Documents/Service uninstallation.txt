@@ -1,0 +1,2 @@
+Open command prompt and run the following command
+=> sc delete "service name displayed in service.msc"
