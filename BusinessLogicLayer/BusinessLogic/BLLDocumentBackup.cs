@@ -20,19 +20,22 @@ namespace BusinessLogicLayer.BusinessLogic
             backupPath = CreateProperPathForBackup(backupPath);
 
             bool res = true;
+            // if we want to backup
             List<ClientMast> clientMasts = new BLLClientMast(_cStr).GetClientList();
             foreach (var client in clientMasts.Where(r => r.DocServerDataSource != "" && r.DocServerUserID != "" && r.DocServerPassword != ""))
             {
                 try
                 {
+                    string[] serverInfo = client.DocServerDataSource.Split(':');
 
+                    Log.WriteLog($"server info: {serverInfo}");
                     Log.WriteBackupLog($"Backup started in client :- {client.ClientName}, DB {client.DbName}...");
 
                     StreamWriter SW = new StreamWriter("backup.bat");
 
-                    string str = $@"mongodump --username=""{client.DocServerUserID}"" --password=""{client.DocServerPassword}"" --db=""{client.DbName}"" --authenticationDatabase=admin --out=""{backupPath}"" --host=""{client.DocServerDataSource}""";
+                    string str = $@"mongodump --username=""{client.DocServerUserID}"" --password=""{client.DocServerPassword}"" --db=""{client.DbName}"" --authenticationDatabase=admin --out=""{backupPath}"" --host=""{serverInfo[0]}"" --port=""{serverInfo[1]}""";
 
-                    //Log.WriteBackupLog(str);
+                    Log.WriteBackupLog(str);
                     SW.WriteLine(str);
 
                     SW.Flush();
@@ -58,7 +61,6 @@ namespace BusinessLogicLayer.BusinessLogic
 
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
-                    //process.WaitForExit();
 
                     Log.WriteBackupLog(output);
                     Log.WriteBackupLog(error);
@@ -68,7 +70,6 @@ namespace BusinessLogicLayer.BusinessLogic
                     else
                         Log.WriteBackupLog($"Cannot backup database in client {client.ClientName}...");
 
-                    //process.Dispose();
                 }
                 catch (Exception ex)
                 {
@@ -84,6 +85,8 @@ namespace BusinessLogicLayer.BusinessLogic
         {
             string path = backup + $"DB Backup {DateTime.Now:yyyy-MM-dd}/";
             Directory.CreateDirectory(path);
+
+            Log.WriteLog($"Backup Path: {path}");
             return path;
         }
     }

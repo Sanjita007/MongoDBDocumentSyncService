@@ -12,6 +12,7 @@ namespace ServiceTest
         {
             InitializeComponent();
             pgTask.MarqueeAnimationSpeed = 0;
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         void StartProgress()
@@ -58,7 +59,7 @@ namespace ServiceTest
 
             new Task(delegate
             {
-                bll.DumpDocumentBackup("D:/MongoDbBackup/");
+                bll.DumpDocumentBackup("C:D/MONGO/");
                 EnableControls(true);
                 StopProgress();
                 MessageBox.Show("Backup completed Successfully!");

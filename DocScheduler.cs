@@ -50,23 +50,25 @@ namespace MongoDocumentSyncService
                 if (DocSyncTime == now)
                 {
                     Log.WriteLog("Mongo DB document sync started...");
-                    new Task(delegate
+                    new Task(() =>
                     {
 
                         bllDoc.SyncDocuments();
                         Log.WriteLog("Mongo DB document sync completed...");
-                    });
+                    }).Start();
                 }
 
                 // check if current time is scheduled time for mongo data backup
                 if (BackupDumpTime == now)
                 {
-                    Log.WriteLog("Mongo DB database backup started...");
-                    new Task(delegate
+                    new Task(() =>
                     {
+                        Log.WriteLog("Mongo DB database backup started...");
+                        Log.WriteLog($"Backup path: {BackupPath}");
                         blDocBackup.DumpDocumentBackup(BackupPath);
                         Log.WriteLog("Mongo DB database backup completed...");
-                    });
+                    }).Start();
+
                 }
             }
             catch (Exception ex)

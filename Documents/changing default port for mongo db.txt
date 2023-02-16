@@ -1,0 +1,8 @@
+Steps for changing default port for mongo db
+1. Navigate to the mongo db installation folder (C:\Program Files\MongoDB\Server\5.0\bin) and open the mongod.cfg file
+2. Under # network interfaces, there is port where default value is 27017, so change the port address to your desirable number as:
+	port: 27033
+3. Save the changes
+4. Restart the mongo db service from the list of services (services.msc)
+5. Login from mongo db compass with the new port
+                               

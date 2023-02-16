@@ -862,6 +862,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A8773A4DCE55EDAE25F7D3BAC316F234"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_318EA8175E32ACFCA715A5CE55D51E4A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1528,12 +1534,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A8773A4DCE55EDAE25F7D3BAC316F234"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_39CB2A8452AA731FA021571C4507A323"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1616,6 +1616,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -5529,9 +5537,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Mongo DB Service Setup"
+        "ProductName" = "8:Mongo Document Sync Service"
         "ProductCode" = "8:{4B14E769-743C-479E-9F54-54B6E7FCDC3F}"
-        "PackageCode" = "8:{5F39940F-86CC-4FBB-B161-46B14EE0844B}"
+        "PackageCode" = "8:{761F92D4-D5D8-4F33-AF9A-BB7B560640FF}"
         "UpgradeCode" = "8:{CDA6ECAF-18F5-4489-933A-642147C0979E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

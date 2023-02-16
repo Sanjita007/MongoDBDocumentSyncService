@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using MongoDocumentSyncService.Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace BusinessLogicLayer.BusinessLogic
 {
@@ -30,10 +31,11 @@ namespace BusinessLogicLayer.BusinessLogic
             get
             {
                 var credential = MongoCredential.CreateCredential("admin", _MongoDbUserId ?? "", _MongoDbPassword ?? "");
+                String[] serverInfo = _MongoDBServer.Split(':');
 
                 MongoClientSettings settings = new MongoClientSettings
                 {
-                    Server = new MongoServerAddress(_MongoDBServer),
+                    Server = new MongoServerAddress(serverInfo[0], int.TryParse(serverInfo[1], out int port)? port: 0),
                     ConnectTimeout = TimeSpan.FromSeconds(20),
                     Credential = credential
                 };
